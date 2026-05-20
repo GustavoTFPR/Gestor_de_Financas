@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
-import { Conta } from "./conta";
+import { Transacao } from "./transacao";
    
   @Entity()
   export class Usuario {
@@ -19,8 +19,8 @@ import { Conta } from "./conta";
     saldo!:number;
     
 
-    @OneToMany(() => Conta, (conta) => conta.usuario)
-    conta: Conta[];
+    @OneToMany(() => Transacao, (transacao) => transacao.usuario)
+    transacao: Transacao[];
    
   
    
