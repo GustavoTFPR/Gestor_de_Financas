@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
-import { Transacao } from "./transacao";
+import { Conta } from "./conta";
    
   @Entity()
   export class Usuario {
@@ -15,8 +15,12 @@ import { Transacao } from "./transacao";
     @Column({ type: "varchar", select: false })
     senha!: string;
 
-    @OneToMany(() => Transacao, (transacao) => transacao.usuario)
-    transacao: Transacao[];
+    @Column({ type: "decimal"})
+    saldo!:number;
+    
+
+    @OneToMany(() => Conta, (conta) => conta.usuario)
+    conta: Conta[];
    
   
    

@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
 import { Usuario } from "./user";
    
   @Entity()
-  export class Transacao {
+  export class Conta {
     @PrimaryGeneratedColumn()
     id!: number;
    
@@ -12,7 +12,7 @@ import { Usuario } from "./user";
     @Column({ type: "decimal"})
     valorRetirado!:number;
 
-    @ManyToOne(() => Usuario, (usuario) => usuario.transacao)
+    @ManyToOne(() => Usuario, (usuario) => usuario.conta)
     usuario!: Usuario;
    
     
