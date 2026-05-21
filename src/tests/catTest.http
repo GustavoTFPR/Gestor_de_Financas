@@ -1,0 +1,10 @@
+###
+GET http://localhost:3000/categorias
+
+###
+POST http://localhost:3000/categorias
+
+{
+  "nome": "Alimentação",
+  "descricao": "Gastos com comida e restaurantes"
+}

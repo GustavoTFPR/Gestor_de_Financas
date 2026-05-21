@@ -1,77 +1,27 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import { JwtPayload, AuthRequest, TipoUsuario } from '../types';
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { UnauthorizedError } from "../helpers/apiError";
 
-// ── autenticar ────────────────────────────────────────────────
-/**
- * Intercepta a requisição, valida o Bearer Token e injeta
- * req.usuario com o payload do JWT.
- */
-export function autenticar(req: Request, res: Response, next: NextFunction): void {
-  const authHeader = req.headers.authorization;
+export const authMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { authorization } = req.headers;
 
-  if (!authHeader?.startsWith('Bearer ')) {
-    res.status(401).json({ erro: 'Token não fornecido. Use: Authorization: Bearer <token>.' });
-    return;
-  }
+  if (!authorization) throw new UnauthorizedError("Token não fornecido");
 
-  const token = authHeader.split(' ')[1];
+  const token = authorization.split(" ")[1];
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
-    (req as AuthRequest).usuario = payload;
+    const payload = jwt.verify(token, process.env.JWT_PASS ?? "secret") as {
+      id: number;
+    };
+
+    req.user_id = payload.id
     next();
-  } catch (err) {
-    if (err instanceof jwt.TokenExpiredError) {
-      res.status(401).json({ erro: 'Token expirado. Faça login novamente.' });
-      return;
-    }
-    res.status(401).json({ erro: 'Token inválido.' });
+  } catch {
+    throw new UnauthorizedError("Token inválido ou expirado");
   }
-}
+};
 
-// ── apenasAdmin ───────────────────────────────────────────────
-/**
- * Restringe o endpoint apenas a administradores.
- * Deve ser usado APÓS autenticar().
- */
-export function apenasAdmin(req: Request, res: Response, next: NextFunction): void {
-  const { usuario } = req as AuthRequest;
-  if (usuario.tipo !== 'administrador') {
-    res.status(403).json({ erro: 'Acesso restrito a administradores.' });
-    return;
-  }
-  next();
-}
-
-// ── apenasProprioOuAdmin ──────────────────────────────────────
-/**
- * Garante que o usuário só acesse seu próprio recurso,
- * a menos que seja administrador. Lê o ID de req.params.id.
- */
-export function apenasProprioOuAdmin(req: Request, res: Response, next: NextFunction): void {
-  const { usuario } = req as AuthRequest;
-  const idAlvo = Number(req.params.id);
-
-  if (usuario.tipo !== 'administrador' && usuario.id !== idAlvo) {
-    res.status(403).json({ erro: 'Você não tem permissão para acessar este recurso.' });
-    return;
-  }
-  next();
-}
-
-// ── permitirTipos ─────────────────────────────────────────────
-/**
- * Factory: cria middleware que permite apenas os tipos listados.
- * Exemplo: permitirTipos('administrador')
- */
-export function permitirTipos(...tipos: TipoUsuario[]) {
-  return (req: Request, res: Response, next: NextFunction): void => {
-    const { usuario } = req as AuthRequest;
-    if (!tipos.includes(usuario.tipo)) {
-      res.status(403).json({ erro: `Acesso permitido apenas para: ${tipos.join(', ')}.` });
-      return;
-    }
-    next();
-  };
-}

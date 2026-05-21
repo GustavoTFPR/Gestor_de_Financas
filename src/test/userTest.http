@@ -1,0 +1,29 @@
+GET http://localhost:3000/api/usuario
+
+###
+
+POST http://localhost:3000/api/usuario
+Content-Type: application/json
+
+{
+    "nome": "pedro",
+    "email": "p@p.com",
+    "senha": "zzz",
+    "saldo": 00.00
+}
+ 
+ ###
+
+
+PATCH  http://localhost:3000/api/usuario/1
+Content-Type: application/json
+
+{
+    "nome": "Pedro Pais"
+}
+
+
+###
+
+
+DELETE http://localhost:3000/api/usuario/1
