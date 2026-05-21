@@ -39,6 +39,7 @@ export class AuthController {
   registro = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { nome, email, senha } = req.body;
+      console.log("Dados recebidos para registro:", { nome, email, senha });
       const existingUser = await this.userRepository.findOneBy({ email });
       if (existingUser) {
         throw new BadRequestError("E-mail já cadastrado");
