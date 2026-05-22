@@ -50,7 +50,6 @@ export class AuthController {
         email,
         senha: hashedPassword,
         saldo: 0,
-        categoria: "Geral",
       });
       await this.userRepository.save(newUser);
       return res.status(201).json({ message: "Usuário registrado com sucesso" });

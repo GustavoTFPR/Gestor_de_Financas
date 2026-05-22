@@ -1,5 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
 import { Transacao } from "./transacao";
+import { Categoria } from "./categoria";
    
   @Entity()
   export class Usuario {
@@ -18,8 +19,8 @@ import { Transacao } from "./transacao";
     @Column({ type: "decimal"})
     saldo!:number;
 
-    @Column({ type: "varchar", nullable: true })
-    categoria!: string;
+    @OneToMany(() => Categoria, (categoria) => categoria.usuario)
+    categoria: Categoria[];
     
     @OneToMany(() => Transacao, (transacao) => transacao.usuario)
     transacao: Transacao[];

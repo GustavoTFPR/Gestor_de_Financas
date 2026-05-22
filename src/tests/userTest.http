@@ -1,39 +1,26 @@
-@authToken = 
-
-GET http://localhost:3000/api/users
-
-###
-GET http://localhost:3000/api/users/active
-
-###
-GET http://localhost:3000/api/users/3
+GET http://localhost:3000/api/usuario
 
 ###
 
-POST http://localhost:3000/api/users
+POST http://localhost:3000/api/usuario
 Content-Type: application/json
 
 {
-  "firstName": "Pedro",
-  "lastName": "Teste",
-  "phone": "2499999-2421",
-  "email": "p@p.com",
-  "password": "admin1234"
+    "nome": "pedro",
+    "email": "p@p.com",
+    "senha": "zzz"
 }
-
+ 
 ###
-
-DELETE http://localhost:3000/api/users/2
-
-###
-
-PATCH  http://localhost:3000/api/users
+PATCH  http://localhost:3000/api/usuario/7
 Content-Type: application/json
-Authorization: Bearer {{authToken}}
 
 {
-  "email": "Pedro Henrique",
+    "nome": "Pedro Pais"
 }
 
+
 ###
-PATCH  http://localhost:3000/api/users/4/toggle
+
+
+DELETE http://localhost:3000/api/usuario/6

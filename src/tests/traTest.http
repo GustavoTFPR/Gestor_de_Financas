@@ -1,0 +1,42 @@
+
+POST http://localhost:3000/api/transacoes
+Content-Type: application/json
+
+{
+  "valor": 1500.00,
+  "tipo": "entrada",
+  "data": "2025-05-21",
+  "usuario": { "id": 1 },
+  "categoria": { "id": 1 }
+}
+
+### 
+POST http://localhost:3000/api/transacoes
+Content-Type: application/json
+
+{
+  "valor": 250.50,
+  "tipo": "saida",
+  "data": "2025-05-21",
+  "usuario": { "id": 1 },
+  "categoria": { "id": 2 }
+}
+
+### 
+GET http://localhost:3000/api/transacoes
+
+### 
+PATCH http://localhost:3000/api/transacoes
+Content-Type: application/json
+
+{
+  "valor": 999.99,
+  "tipo": "saida"
+}
+
+
+### Deletar transação
+DELETE http://localhost:3000/api/transacoes
+
+### --------------------------------
+

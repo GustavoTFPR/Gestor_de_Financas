@@ -8,7 +8,7 @@ export class UserController {
     create = async (req: Request, res: Response, next: NextFunction) => {
       try {
         const user = await this.userService.create(req.body);
-        res.status(201).json(user);
+        res.status(201).json({ message: "Usuário registrado com sucesso" });
       } catch (error: unknown) {
         next(error);
       }
