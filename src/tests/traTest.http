@@ -1,32 +1,32 @@
 
-POST http://localhost:3000/api/transacoes
+POST http://localhost:3000/api/transacao
 Content-Type: application/json
 
 {
   "valor": 1500.00,
   "tipo": "entrada",
   "data": "2025-05-21",
-  "usuario": { "id": 1 },
-  "categoria": { "id": 1 }
+  "usuario": { "id": 7 },
+  "categoria": { "id": 5 }
 }
 
 ### 
-POST http://localhost:3000/api/transacoes
+POST http://localhost:3000/api/transacao
 Content-Type: application/json
 
 {
   "valor": 250.50,
   "tipo": "saida",
   "data": "2025-05-21",
-  "usuario": { "id": 1 },
-  "categoria": { "id": 2 }
+  "usuario": { "id": 7 },
+  "categoria": { "id": 5 }
 }
 
 ### 
-GET http://localhost:3000/api/transacoes
+GET http://localhost:3000/api/transacao
 
 ### 
-PATCH http://localhost:3000/api/transacoes
+PATCH http://localhost:3000/api/transacao
 Content-Type: application/json
 
 {

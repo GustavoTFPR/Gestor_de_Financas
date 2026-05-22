@@ -1,38 +1,36 @@
 ###
-GET http://localhost:3000/categorias
+GET http://localhost:3000/api/categoria
 
 ###
-POST http://localhost:3000/categorias
+POST http://localhost:3000/api/categoria
+Content-Type: application/json
 
 {
-  "nome": "Alimentação",
-  "descricao": "Gastos com comida e restaurantes"
+  "nome": "Aluguel",
+  "descricao": "Gastos com moradia"
 }
 
 ###
-POST http://localhost:3000/categoria
+POST http://localhost:3000/api/categoria
 Content-Type: application/json
 
 {
   "nome": "Alimentação",
   "descricao": "Gastos com comida e restaurante",
-  "status": "ativo",
-  "usuarioId": 1
 }
 
 ###
 
-GET http://localhost:3000/categoria
+GET http://localhost:3000/api/categoria
 
 ###
 
-PATCH  http://localhost:3000/categoria/1
+PATCH  http://localhost:3000/api/categoria/1
 Content-Type: application/json
 
 {
   "nome": "Transporte",
   "descricao": "Gastos com ônibus e combustível",
-  "status": "ativo"
 }
 
-DELETE http://localhost:3000/categoria/1
+DELETE http://localhost:3000/api/categoria/1

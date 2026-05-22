@@ -1,16 +1,16 @@
 import { AppDataSource } from "../data-source";
 import { Transacao } from "../entity/transacao";
 
-export class traService{
+export class traService {
   private transacaoRepository = AppDataSource.getRepository(Transacao)
 
-  create= async (tra: Partial<Transacao>) => {
+  create = async (tra: Partial<Transacao>) => {
     const idtra = this.transacaoRepository.create(tra);
     return await this.transacaoRepository.save(idtra);
   };
 
   list = async () => {
-    return await this.transacaoRepository.find();
+    return await this.transacaoRepository.find({ relations: ["usuario", "categoria"] });
   };
 
   delete = async (id: number) => {
@@ -24,6 +24,6 @@ export class traService{
     if (!transacao) {
       throw new Error("transacao não encontrado");
     }
-  
-}
+
+  }
 }
