@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
 import { Transacao } from "./transacao";
+import { Usuario } from "./user";
 
-@Entity("categorias")
+@Entity()
 export class Categoria {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,5 +17,8 @@ export class Categoria {
   status: string;
 
   @OneToMany(() => Transacao, (transacao) => transacao.categoria)
-  transacoes: Transacao[];
+  transacao: Transacao[];
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.categoria, { onDelete: "CASCADE" })
+  usuario!: Usuario | null;
 }

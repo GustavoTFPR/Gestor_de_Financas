@@ -1,5 +1,9 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
 import { Usuario } from "./user";
+import { Categoria } from "./categoria";
+enum TipoTransacao{
+  ENTRADA = "entrada", SAIDA = "saida"
+}
    
   @Entity()
   export class Transacao {
@@ -7,16 +11,20 @@ import { Usuario } from "./user";
     id!: number;
    
     @Column({ type: "decimal"})
-    valorAdicionado!:number;
+    valor!:number;
 
-    @Column({ type: "decimal"})
-    valorRetirado!:number;
+    @Column({type: "varchar", enum:TipoTransacao})
+    tipo!:TipoTransacao
 
-    @ManyToOne(() => Usuario, (usuario) => usuario.transacao)
+    @Column({type: "timestamp"})
+    data!:Date
+
+    @ManyToOne(() => Usuario, (usuario) => usuario.transacao,{onDelete: "CASCADE"})
     usuario!: Usuario;
 
-    @Column({ type: "varchar"})
-    categoria!: string;
+    @ManyToOne(() => Categoria, (categoria) => categoria.transacao,{onDelete: "RESTRICT"})
+    categoria!: Categoria;
 
+ 
    
   }
