@@ -1,0 +1,57 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzc5NzQ3OTUzLCJleHAiOjE3Nzk3NzY3NTN9.KhrXejPQJzMbJ5YR_nq47F2F4VbEmSBKx7eyZ8Y7wTM
+POST http://localhost:3000/api/transacao
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "valor": 1500.00,
+  "tipo": "entrada",
+  "data": "2025-05-21",
+  "usuario": { "id": 1 },
+  "categoria": { "id": 1 }
+}
+
+### 
+POST http://localhost:3000/api/transacao
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "valor": 250.50,
+  "tipo": "saida",
+  "data": "2025-05-21",
+  "usuario": { "id": 1 },
+  "categoria": { "id": 1 }
+}
+
+### 
+GET http://localhost:3000/api/transacao
+Authorization: Bearer {{token}}
+
+### 
+PATCH http://localhost:3000/api/transacao/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "valor": 999.99,
+  "tipo": "saida"
+}
+
+
+
+
+###
+DELETE http://localhost:3000/api/transacoes
+Authorization: Bearer {{token}}
+
+
+
+
+
+###
+GET http://localhost:3000/api/transacao/saldo/1
+Authorization: Bearer {{token}}
+
+
+

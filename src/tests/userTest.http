@@ -1,0 +1,34 @@
+
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzc5NzQ3OTUzLCJleHAiOjE3Nzk3NzY3NTN9.KhrXejPQJzMbJ5YR_nq47F2F4VbEmSBKx7eyZ8Y7wTM
+
+
+GET http://localhost:3000/api/usuario
+Authorization: Bearer {{token}}
+
+###
+
+POST http://localhost:3000/api/usuario
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "pedro",
+    "email": "pzz@p.com",
+    "senha": "zzz"
+}
+ 
+###
+PATCH  http://localhost:3000/api/usuario/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Pedro Pais"
+}
+
+
+###
+
+
+DELETE http://localhost:3000/api/usuario/1
+Authorization: Bearer {{token}}
