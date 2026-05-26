@@ -16,9 +16,6 @@ import { Categoria } from "./categoria";
     @Column({ type: "varchar", select: false })
     senha!: string;
 
-    @Column({ type: "decimal"})
-    saldo!:number;
-
     @OneToMany(() => Categoria, (categoria) => categoria.usuario)
     categoria: Categoria[];
     

@@ -1,30 +1,32 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Usuario } from "./user";
 import { Categoria } from "./categoria";
-enum TipoTransacao{
+export enum TipoTransacao {
   ENTRADA = "entrada", SAIDA = "saida"
 }
-   
-  @Entity()
-  export class Transacao {
-    @PrimaryGeneratedColumn()
-    id!: number;
-   
-    @Column({ type: "decimal"})
-    valor!:number;
 
-    @Column({type: "varchar", enum:TipoTransacao})
-    tipo!:TipoTransacao
+@Entity()
+export class Transacao {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @Column({type: "timestamp"})
-    data!:Date
+  @Column({ type: "numeric", precision: 10, scale: 2 })
+  valor!: number;
 
-    @ManyToOne(() => Usuario, (usuario) => usuario.transacao,{onDelete: "CASCADE"})
-    usuario!: Usuario;
+  @Column({ type: "varchar", enum: TipoTransacao })
+  tipo!: TipoTransacao
 
-    @ManyToOne(() => Categoria, (categoria) => categoria.transacao,{onDelete: "RESTRICT"})
-    categoria!: Categoria;
+  @Column({ type: "timestamp" })
+  data!: Date
 
- 
-   
-  }
+
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.transacao, { onDelete: "CASCADE" })
+  usuario!: Usuario;
+
+  @ManyToOne(() => Categoria, (categoria) => categoria.transacao, { onDelete: "RESTRICT" })
+  categoria!: Categoria;
+
+
+
+}

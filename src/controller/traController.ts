@@ -41,4 +41,13 @@ export class TraController {
         next(error);
       }
     };
+
+    saldo = async (req: any, res: Response, next: NextFunction) => {
+      try {
+        const result = await this.traService.saldo(Number(req.params.id));
+        return res.status(200).json(result);
+      } catch (error) {
+        next(error);
+      }
+    };
   }
