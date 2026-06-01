@@ -39,10 +39,21 @@ export class UserService {
   update = async (id: number, dados: Partial<Usuario>) => {
     const usuario = await this.usuarioRepository.findOneBy({ id });
     if (!usuario) {
-      throw new Error("usuario não encontrado");
+      throw new BadRequestError("Usuário não encontrado"); 
     }
-    const usuarioatt = this.usuarioRepository.merge(usuario, dados)
-      return await this.usuarioRepository.save(usuarioatt)
-
+  
+    if ("email" in dados && (!dados.email || dados.email.trim() === "")) {
+      throw new BadRequestError("E-mail não pode ser vazio"); 
+    }
+  
+    if (dados.email && dados.email !== usuario.email) {
+      const emailEmUso = await this.usuarioRepository.findOneBy({ email: dados.email });
+      if (emailEmUso) {
+        throw new BadRequestError("E-mail já cadastrado");   
+      }
+    }
+  
+    const usuarioatt = this.usuarioRepository.merge(usuario, dados);
+    return await this.usuarioRepository.save(usuarioatt);   
   }
 }
