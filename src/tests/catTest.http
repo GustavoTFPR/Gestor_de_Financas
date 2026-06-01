@@ -1,0 +1,45 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzc5NzQ3OTUzLCJleHAiOjE3Nzk3NzY3NTN9.KhrXejPQJzMbJ5YR_nq47F2F4VbEmSBKx7eyZ8Y7wTM
+
+
+###
+GET http://localhost:3000/api/categoria
+Authorization: Bearer {{token}}
+
+###
+POST http://localhost:3000/api/categoria
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nome": "comida",
+  "descricao": "final de semana"
+}
+
+###
+POST http://localhost:3000/api/categoria
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nome": "Alimentação",
+  "descricao": "Gastos com comida e restaurante",
+}
+
+###
+
+GET http://localhost:3000/api/categoria
+Authorization: Bearer {{token}}
+
+###
+
+PATCH  http://localhost:3000/api/categoria/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nome": "Transporte",
+  "descricao": "Gastos com ônibus e combustível",
+}
+
+DELETE http://localhost:3000/api/categoria/1
+Authorization: Bearer {{token}}

@@ -1,0 +1,20 @@
+POST http://localhost:3000/api/registro
+Content-Type: application/json
+
+{
+    "nome": "samara",
+    "email": "p334@p.com",
+    "senha": "zzz"
+}
+ 
+###
+
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "p334@p.com",
+  "password": "zzz"
+}
+
+
