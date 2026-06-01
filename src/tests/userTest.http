@@ -6,18 +6,6 @@ GET http://localhost:3000/api/usuario
 Authorization: Bearer {{token}}
 
 ###
-
-POST http://localhost:3000/api/usuario
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-    "nome": "pedro",
-    "email": "pzz@p.com",
-    "senha": "zzz"
-}
- 
-###
 PATCH  http://localhost:3000/api/usuario/1
 Content-Type: application/json
 Authorization: Bearer {{token}}

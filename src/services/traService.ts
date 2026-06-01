@@ -1,15 +1,24 @@
 import { AppDataSource } from "../data-source";
 import { TipoTransacao, Transacao } from "../entity/transacao";
 import { Usuario } from "../entity/user";
-import { NotFoundError } from "../helpers/apiError";
+import { BadRequestError, NotFoundError } from "../helpers/apiError";
 
 export class traService {
   private transacaoRepository = AppDataSource.getRepository(Transacao)
   private usuarioRepository = AppDataSource.getRepository(Usuario)
 
   create = async (tra: Partial<Transacao>) => {
-    const idtra = this.transacaoRepository.create(tra);
-    return await this.transacaoRepository.save(idtra);
+    const { valor, tipo, data, usuario } = tra;
+  
+    if (!valor || !tipo || !data || !usuario) {          
+      throw new BadRequestError("Campos obrigatórios: valor, tipo, data, usuario");
+    }
+  
+    const usuarioExiste = await this.usuarioRepository.findOneBy({ id: (usuario as any).id });
+    if (!usuarioExiste) throw new NotFoundError("Usuário não encontrado");
+  
+    const nova = this.transacaoRepository.create(tra);
+    return await this.transacaoRepository.save(nova);
   };
 
   list = async () => {
